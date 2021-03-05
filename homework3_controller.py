@@ -21,8 +21,8 @@ camera.enable(timestep)
 
 leftMotor = robot.getDevice('left wheel motor')
 rightMotor = robot.getDevice('right wheel motor')
-#leftMotor.setPosition(8.0)
-#rightMotor.setPosition(16.0)
+leftMotor.setPosition(float('inf'))
+rightMotor.setPosition(float('inf'))
 
 
 
@@ -117,8 +117,8 @@ while robot.step(timestep) != -1:
         
     if(coord[0] < 22):
             
-        leftMotor.setPosition(-.7)
-        rightMotor.setPosition(.7)
+        leftMotor.setVelocity(-2)
+        rightMotor.setVelocity(2)
         print("Left")
         
     #elif(coord[0] < 52):
@@ -130,8 +130,8 @@ while robot.step(timestep) != -1:
     
     elif(coord[1] > 330):
             
-        leftMotor.setPosition(.7)
-        rightMotor.setPosition(-.7)
+        leftMotor.setVelocity(2)
+        rightMotor.setVelocity(-2)
         print("Right")
         
                 
@@ -146,18 +146,13 @@ while robot.step(timestep) != -1:
         
     if(area < 15000):
 
-        leftMotor.setPosition(0)
-        rightMotor.setPosition(0)
-        leftMotor.setPosition(float('inf'))
-        rightMotor.setPosition(float('inf'))
+        leftMotor.setVelocity(0)
+        rightMotor.setVelocity(0)
     elif(area > 25000):
 
-        leftMotor.setPosition(0)
-        rightMotor.setPosition(0)
-            
-        #else:
-         #   leftMotor.setPosition(float('inf'))
-          #  rightMotor.setPosition(float('inf'))
+        leftMotor.Velocity(2)
+        rightMotor.Velocity(2)
+
     
         
 #    else:
