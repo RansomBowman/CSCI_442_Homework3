@@ -28,7 +28,7 @@ rightMotor = robot.getDevice('right wheel motor')
 
 
 
-
+i = 0
 
 
 while robot.step(timestep) != -1:
@@ -92,27 +92,77 @@ while robot.step(timestep) != -1:
     
     x = 0
     x2 = 0
+    area = 0
     
     for cnt in cont: 
         if cv2.contourArea(cnt) < 500: 
             continue
+#        else:
+ #           leftMotor.setVelocity(0)
+  #          leftMotor.setVelocity(0)
+   #         leftMotor.setPosition(0)
+    #        rightMotor.setPosition(0)
+
         (x, y, w, h) = cv2.boundingRect(cnt)
         cv2.rectangle(out, (x, y), (x + w, y + h), (0, 255, 0), 2)
         x2 = x + w
-        print("x: " + str(x), "y: " + str(y), "x2: " + str(x2), "y2: " + str(y + h))
+        y2 = y + h
+        print("x: " + str(x), "y: " + str(y), "x2: " + str(x2), "y2: " + str(y2))
         
-    if(x2 < 32 and x2 > 0):
+        coord = [x,x2]
+        
+        wid = x2 - x
+        hei = y2 - y
+        
+        area = wid * hei
+        
+        print('Width: ' + str(wid) + 'Height: ' + str(hei) + 'Area: ' + str(area))
+        
+    if(coord[0] < 22):
+            
+        leftMotor.setPosition(-.7)
+        rightMotor.setPosition(.7)
         print("Left")
-        leftMotor.setPosition(-4)
-        rightMotor.setPosition(4)
-#    else:
- #       leftMotor.setPosition(0)
-  #      rightMotor.setPosition(0)
+        
+    #elif(coord[0] < 52):
+            
+       # leftMotor.setPosition(-.7)
+      #  rightMotor.setPosition(.7)
+       # print("Left")
+      #  break
     
-    if(x > 320 and x < 352):
+    elif(coord[1] > 330):
+            
+        leftMotor.setPosition(.7)
+        rightMotor.setPosition(-.7)
         print("Right")
-        leftMotor.setPosition(4)
-        rightMotor.setPosition(-4)
+        
+                
+   # elif(coord[1] > 300):
+            
+       # leftMotor.setPosition(.7)
+       # rightMotor.setPosition(-.7)
+      #  print("Right")
+      #  break
+      
+    print(area)
+        
+    if(area < 15000):
+
+        leftMotor.setPosition(0)
+        rightMotor.setPosition(0)
+        leftMotor.setPosition(float('inf'))
+        rightMotor.setPosition(float('inf'))
+    elif(area > 25000):
+
+        leftMotor.setPosition(0)
+        rightMotor.setPosition(0)
+            
+        #else:
+         #   leftMotor.setPosition(float('inf'))
+          #  rightMotor.setPosition(float('inf'))
+    
+        
 #    else:
  #       leftMotor.setPosition(0)
   #      rightMotor.setPosition(0)
@@ -128,8 +178,7 @@ while robot.step(timestep) != -1:
     
     
     
-    
-    
+    i += 1
     
     
     
@@ -138,5 +187,6 @@ while robot.step(timestep) != -1:
         break
 
 
-cv2.destroAllWindows()
+cv2.destroyAllWindows()
+    
     
