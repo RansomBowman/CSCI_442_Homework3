@@ -28,9 +28,6 @@ rightMotor = robot.getDevice('right wheel motor')
 
 
 
-i = 0
-
-
 while robot.step(timestep) != -1:
     img = camera.getImage()
     width = camera.getWidth()
@@ -178,7 +175,7 @@ while robot.step(timestep) != -1:
     
     
     
-    i += 1
+
     
     
     
@@ -188,5 +185,4 @@ while robot.step(timestep) != -1:
 
 
 cv2.destroyAllWindows()
-    
-    
+
